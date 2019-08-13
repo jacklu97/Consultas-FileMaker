@@ -11,6 +11,10 @@ body {
     
 }
 
+.contenedor-maestro{
+    text-align: center;
+}
+
 .bg-image {
 
     position: absolute;
