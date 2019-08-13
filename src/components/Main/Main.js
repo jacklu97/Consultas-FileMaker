@@ -28,7 +28,7 @@ class Main extends Component {
                         <ul className="nav navbar-nav navbar-right">
                             <li style={{textDecoration: 'none'}}><NavLink to="/facturas"><i class="fas fa-file-invoice" style={{fontSize: '1.75em'}}></i>{'\u00A0\u00A0'}Facturas</NavLink></li>
                             <li style={{textDecoration: 'none'}}><NavLink to="/traking"><i class="fas fa-chart-line" style={{fontSize: '1.75em'}}></i>{'\u00A0\u00A0'}Tracking</NavLink></li>
-                            <li style={{textDecoration: 'none'}}><NavLink to="/traking"><i class="fas fa-door-open" style={{fontSize: '1.75em'}}></i>{'\u00A0\u00A0'}Salir</NavLink></li>
+                            <li style={{textDecoration: 'none'}}><a href="#"><i class="fas fa-door-open" style={{fontSize: '1.75em'}}></i>{'\u00A0\u00A0'}Salir</a></li>
                         </ul>
                         </div>
                     </nav>
