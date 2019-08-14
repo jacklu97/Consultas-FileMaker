@@ -5,6 +5,7 @@ class Facturas extends Component {
         return (
             <div>
                 <h1>Hola mundo</h1>
+                <button>Hola soy una descarga perrona</button>
             </div>
             )
     }

@@ -11,20 +11,26 @@ class Login extends Component {
         username: '',
         password: '',
         errorPass: false,
-        errorUsr: false
+        errorUsr: false,
+        token: {
+            fecha:''
+        }
     }
 
     comprobarIngreso = (e) =>{
         e.preventDefault();
         this.setState({errorPass: false, errorUsr: false})
         console.log(this.state)
+        
         if (this.state.username === "BME820202JM6" && this.state.password === "Bmercurio_131145"){
             console.log("Exito")
             this.props.history.push('/home')
         }
         else if(this.state.username === "usr" && this.state.password === "pss"){
+            localStorage.setItem('jwtToken', JSON.stringify(this.state.token))
             console.log("Exito")
             this.props.history.push('/home')
+            
         }
         else{
             console.log("Tas todo meco")
@@ -37,8 +43,18 @@ class Login extends Component {
         }
     }
 
+    crearToken = () => {
+        this.setState({
+            token: {
+                fecha: new Date()
+            }
+        })
+        
+    }
+
     onChangeHandler = (e) =>{
         this.setState({[e.target.name]: e.target.value});
+        this.crearToken();
     }
 
     render() {

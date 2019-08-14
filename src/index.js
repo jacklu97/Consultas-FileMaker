@@ -12,14 +12,15 @@ import {
   } from "react-router-dom";
 import Login from './components/Login/Login';
 import Main from './components/Main/Main';
+import requireAuth from './utils/requireAuth';
 
 
 ReactDOM.render(
     
 <Router>
     <Switch>
-        <Route exact path='/' component={Login}></Route>
-        <Route path='/home' component={Main} />
+        <Route exact path='/' component={(Login)}></Route>
+        <Route path='/home' component={requireAuth(Main)} />
     </Switch>
 </Router>
 , document.getElementById('root'));
