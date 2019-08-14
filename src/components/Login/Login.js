@@ -73,7 +73,7 @@ class Login extends Component {
                                 </div> : null}
                         </div>
                         <div>
-                            <button disabled={this.state.username.length < 1 && this.state.password.length < 1 ? true : false} className="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" onClick={this.comprobarIngreso}>Ingresar</button>  
+                            <button disabled={(this.state.username.length < 1 && this.state.password.length < 1) ? true : false} className="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" onClick={this.comprobarIngreso}>Ingresar</button>  
                         </div>
                     </form>
                     </div>

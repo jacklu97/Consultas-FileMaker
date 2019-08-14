@@ -1,0 +1,8 @@
+@media (max-width: 700px) {
+    .navbar-header {
+      background-color: black;
+    }
+    nav.navbar {
+      border: 0px;
+    }
+  }
