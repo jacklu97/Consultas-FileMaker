@@ -40,8 +40,30 @@ class TrackingForm extends Component {
         return(
             <div>
                 <h1>Hola Tracking</h1>
-                {carga}
-                <TrackingComponent/>
+                {this.state.cargado ? 
+                 this.state.embarques.map( (e, i) => {
+                    return <TrackingComponent
+                     key = {i}
+                     id={e.ID_FILE}
+                     mbl={e.MBL}
+                     hbl={e.HBL}
+                     buque={e.BUQUE}
+                     pol={e.POL}
+                     pod={e.POD}
+                     desFin={e["DESTINO FINAL"]}
+                     viaje={e.VIAJE}
+                     navi={e.NAVIERA}
+                     dc20={e["CNTR 20DC"]}
+                     dc40={e["CNTR 40DC"]}
+                     hq40={e["CNTR 40HQ"]}
+                     lcl={e["CNTR LCL"]}
+                     contenedores={e.CONTENEDORES}
+                     etd={e.ETD}
+                     eta={e.ETA}
+                     status={e["STATUS EMBARQUES"]}/>
+                 })
+                 : carga}
+                
             </div>
         )
     }

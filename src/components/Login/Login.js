@@ -44,7 +44,7 @@ class Login extends Component {
     render() {
         return (
             <div className="contenedor-maestro"> <div className="bg-image"></div>
-                <div className="container">
+                <div className="container formato">
                     <div id="login" className="signin-card">
                     <div className="logo-image">
                     <img src={logo} alt="Logo" title="Logo" width="138"/>

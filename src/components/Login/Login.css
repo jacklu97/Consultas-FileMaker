@@ -15,6 +15,12 @@ body {
     text-align: center;
 }
 
+.formato{
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(50%);
+}
+
 .bg-image {
 
     position: absolute;

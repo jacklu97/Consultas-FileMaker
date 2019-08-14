@@ -24,7 +24,7 @@ class Main extends Component {
                         <div className="container-fluid" style={{alignItems: 'center'}}>
                             <div className="navbar-header">
                                 <NavLink to="/" className="navbar-brand" style={{marginTop:'5px'}}><p>Central Cargo</p></NavLink>
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
+                                <button  type="button" className="navbar-toggle collapsed fas fa-bars" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
                             </div>
                         
                         <ul className="nav navbar-nav navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-1">
