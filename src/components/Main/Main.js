@@ -8,7 +8,7 @@ import {
   } from "react-router-dom";
 
 
-  import './Main.css'
+import './Main.css'
 import Facturas from '../Facturas/Facturas';
 import Home from '../Home/Home';
 import TrackingForm from '../Tracking/TrackingForm';

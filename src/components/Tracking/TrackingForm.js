@@ -7,6 +7,8 @@ import TrackingComponent from './TrackingComponent';
 
 class TrackingForm extends Component {
     state={
+        busqueda: '',
+        filtrados: [],
         embarques: [],
         cargado: false,
         error: false
@@ -16,16 +18,29 @@ class TrackingForm extends Component {
         axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/EmbarquesApi.json?RFMfind=SELECT%20ID_FILE%2CMBL%2CHBL%2CBUQUE%2CPOL%2CPOD%2C%27DESTINO FINAL%27%2CVIAJE%2CNAVIERA%2CTIPO%2CCLIENTE%2C%27CNTR 20DC%27%2C%27CNTR 40DC%27%2C%27CNTR 40HQ%27%2C%27CNTR LCL%27%2CCONTENEDORES%2CETD%2CETA%2C%27STATUS EMBARQUES%27%20WHERE%20STATUS_REPORTE%3DACTIVA%20AND%20_ID_CLIENTE%3DCRM4379',
                     {
                         'auth':{
-                            username: 'jcardenas',
-                            password: 'Car_0905'
+                            username: 'system',
+                            password: 'Sys1638'
                         }
                     })
         .then( response => {
-            this.setState({embarques: response.data.data, cargado: true})
+            this.setState({embarques: response.data.data, filtrados: response.data.data, cargado: true})
             console.log(this.state)
         })
         .catch( error => {
             this.setState({error: true})
+        })
+    }
+
+    handleFinderChange = (e) =>{
+        let dato = e.target.value.toLowerCase()
+        this.setState({
+            busqueda: dato,
+            filtrados: this.state.embarques.filter( e => {
+                return Object.values(e)
+                .join(" ")
+                .toLowerCase()
+                .match(dato)
+            })
         })
     }
     
@@ -39,9 +54,18 @@ class TrackingForm extends Component {
 
         return(
             <div>
-                <h1>Hola Tracking</h1>
+                <h1>Listado de embarques</h1>
+                <div className="wrap">
+                    <div className="search">
+                        <input onChange={this.handleFinderChange} type="text" className="searchTerm" placeholder="Ingresa ID File, MBL, HBL..."/>
+                        <button type="submit" className="searchButton">
+                            <i className="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
                 {this.state.cargado ? 
-                 this.state.embarques.map( (e, i) => {
+                 this.state.filtrados.map( (e, i) => {
                     return <TrackingComponent
                      key = {i}
                      id={e.ID_FILE}

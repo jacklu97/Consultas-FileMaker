@@ -52,8 +52,8 @@ const TrackingComponent = (props) => {
             <ul>
                 {listItems}
             </ul>
-            <h5>ETD: {props.etd}</h5>
             <h5>ETA: {props.eta}</h5>
+            <h5>ETD: {props.etd}</h5>
             <div className="estatusEmbarque">
                 <i className={claseStatus} style={{fontSize: '2.75em', color:'red'}}></i>
                 <p style={{marginTop:'4%'}}>{props.status}</p>
