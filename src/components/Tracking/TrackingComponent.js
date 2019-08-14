@@ -8,6 +8,8 @@ const claseVariable = (status) =>{
     }
     else if(status === "EN AGUA")
         return "fas fa-ship"
+    else if(status === "EN PUERTO")
+        return "fas fa-warehouse"
     else return "fas fa-dolly"
 }
 
