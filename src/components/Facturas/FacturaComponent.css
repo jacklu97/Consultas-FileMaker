@@ -1,0 +1,43 @@
+.factura-caja{
+    background: #fff;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 5px;
+    box-shadow: -1px 2px 34px -13px rgba(0,0,0,0.75);
+    text-align: left;
+    overflow: hidden;
+}
+
+.factura-texto {
+    margin-left: 15px;
+  }
+
+  .descargaFact {
+    position: absolute;
+    left: 75%;
+    bottom: 42%;
+    text-align: center;
+}
+
+@media (max-width: 462px) {
+    .descargaFact {
+        bottom: 38%;
+        left: 73%;
+    }
+  }
+
+.botones{
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px ;
+}
+
+.iconos-descarga{
+    font-size: '3.5rem';
+}
