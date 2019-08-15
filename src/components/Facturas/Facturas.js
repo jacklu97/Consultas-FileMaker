@@ -60,10 +60,12 @@ class Facturas extends Component {
 
         return (
             <div>
-                <h1>Hola mundo</h1>
+                <h1>Listado de facturas</h1>
                 <div className="row">
                     {this.state.cargado ? 
                     this.state.facturasBus.map( (f,i) => {
+                        let textoPdf64 = f.PdfEncode
+                        //let pasoPdf = atob(textoPdf64)
                         return <FacturaComponent 
                                 descarga = {this.downloadHandler}
                                 key = {i}
@@ -73,7 +75,8 @@ class Facturas extends Component {
                                 divisa={f.CODIGO_DIVISA}
                                 tipoCom={f["TIPO.COMPROBANTE"]}
                                 importe={f["IMPORTE FACT"]}
-                                xml={f.FXML ? false : true}/>
+                                xml={f.FXML ? false : true}
+                                pdf={textoPdf64}/>
                     })
                     : carga}
                 </div>
