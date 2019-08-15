@@ -21,8 +21,19 @@
 
 @media (max-width: 462px) {
     .descargaFact {
-        bottom: 38%;
+        bottom: 48%;
         left: 73%;
+    }
+    .botones{
+        border-radius: 50%;
+        border: none;
+        background-color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 1px ;
     }
   }
 
@@ -38,6 +49,3 @@
     margin: 1px ;
 }
 
-.iconos-descarga{
-    font-size: '3.5rem';
-}

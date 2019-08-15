@@ -1,0 +1,15 @@
+.prueba {
+    color: green;
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 2%;
+    margin-left: 5%;
+}
+
+
+@media (max-width: 1000px) {
+    .prueba {
+        margin-left: 0;
+        width: 60%;
+    }
+  }

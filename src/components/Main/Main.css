@@ -6,3 +6,11 @@
       border: 0px;
     }
   }
+
+.iconos {
+  color: #adadad
+}
+
+.iconos:hover{
+  color: white
+}

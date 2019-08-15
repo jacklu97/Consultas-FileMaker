@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import FacturaComponent from './FacturaComponent';
+import Select from 'react-select'
 
+import './Facturas.css'
 class Facturas extends Component {
 
     state = {
@@ -50,6 +52,22 @@ class Facturas extends Component {
         FileDownload(desEncripta, 'prueba.'+params)
     }
 
+    handleFinderChange = (e) =>{
+        console.log(e)
+        let dato = ''
+        if(e !== null)
+            dato = e.value.toLowerCase()
+        this.setState({
+            busqueda: dato,
+            facturasBus: this.state.facturas.filter( e => {
+                return Object.values(e)
+                .join(" ")
+                .toLowerCase()
+                .match(dato)
+            })
+        })
+    }
+
     render(){
         const carga = (<div className="spinner-box">
                       <div className="circle-border">
@@ -57,10 +75,23 @@ class Facturas extends Component {
                       </div>  
                     </div>)
 
+        const empresas = [
+            { value: 'CCF MEXICO', label: 'CENTRAL CARGO FORWARDING'},
+            { value: 'CCI HONG KONG', label: 'CENTRAL CARGO INTERNATIONAL LIMITED'}
+        ]
 
         return (
             <div>
-                <h1>Listado de facturas</h1>
+                <h1 style={{display: 'inline'}}>Listado de facturas</h1>
+                <div style={{display: 'inline', width:'10%'}}>
+                    <Select name="empresa"
+                            className="prueba"
+                            options={empresas} 
+                            onChange={this.handleFinderChange}
+                            isClearable={true}
+                            defaultInputValue="Selecciona una empresa..."
+                            />        
+                </div>
                 <div className="row">
                     {this.state.cargado ? 
                     this.state.facturasBus.map( (f,i) => {

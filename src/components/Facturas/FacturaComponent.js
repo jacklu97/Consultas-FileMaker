@@ -10,7 +10,8 @@ const FacturaComponent = (props) =>{
                 <div className="factura-texto">
                     <h2>No fact: {props.idFac}</h2>
                     <h3>File: {props.file}</h3>
-                    <h3>Empresa: {props.empresa}</h3>
+                    <h3>Empresa: </h3>
+                    <h4>{props.empresa}</h4>
                     <h4>Divisa: {props.divisa}</h4>
                     <h4>Tipo de comprobante: {props.tipoCom}</h4>
                     <h4>Importe: {'$'+props.importe}</h4>
