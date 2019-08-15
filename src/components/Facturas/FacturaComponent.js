@@ -25,4 +25,8 @@ const FacturaComponent = (props) =>{
     )
 }
 
+/*
+Para poder descargar no es más que necesario pasar el contenido codificado
+*/
+
 export default FacturaComponent

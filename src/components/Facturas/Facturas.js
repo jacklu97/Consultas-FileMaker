@@ -71,7 +71,7 @@ class Facturas extends Component {
                                 key = {i}
                                 idFac={f["_NO FACTURA"]} 
                                 file={f.FILE}
-                                empresa={f["EMPRESA_QUE_FACTURARA"]}
+                                empresa={f["EMPRESA_QUE_FACTURARA"] === "CCF MEXICO" ? "CENTRAL CARGO FORWARDING" : "CENTRAL CARGO INTERNATIONAL LIMITED"}
                                 divisa={f.CODIGO_DIVISA}
                                 tipoCom={f["TIPO.COMPROBANTE"]}
                                 importe={f["IMPORTE FACT"]}
