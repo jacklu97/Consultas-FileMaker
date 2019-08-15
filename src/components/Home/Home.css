@@ -1,0 +1,44 @@
+.cabecera {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.general {
+    font-size: 3rem;
+}
+
+@media (max-width: 1000px) {
+    .general {
+        font-size: 2rem;
+    }
+  }
+
+.piso{
+    margin-top: 2%;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+}
+
+.logoCC {
+    margin-top: 3%;
+    width: 250px;
+}
+
+@media (max-width: 700px) {
+    .logoCC {
+        width: 50%;
+    }
+  }
+
+.logoCer{
+    margin-top: 3%;
+    margin-left: 12%;
+    height: 13rem;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+.frase{
+    font-family: 'Montserrat', sans-serif;
+}

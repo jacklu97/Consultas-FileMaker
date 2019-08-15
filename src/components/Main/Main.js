@@ -30,8 +30,8 @@ class Main extends Component {
                     <nav className="navbar navbar-inverse navbar-fixed-top" >
                         <div className="container-fluid" style={{alignItems: 'center'}}>
                             <div className="navbar-header">
-                                <NavLink to="/" className="navbar-brand" style={{marginTop:'5px', color:'red'}}><p>Central <span style={{color:'white'}}>Cargo</span> </p></NavLink>
-                                <button  type="button" className="navbar-toggle collapsed fas fa-bars" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
+                                <NavLink to="/" className="navbar-brand" style={{marginTop:'5px'}}><p style={{color: 'red'}}>Central <span style={{color:'white'}}>Cargo</span> </p></NavLink>
+                                <button style={{color:'white'}}  type="button" className="navbar-toggle collapsed fas fa-bars" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
                             </div>
                         
                         <ul className="nav navbar-nav navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-1">

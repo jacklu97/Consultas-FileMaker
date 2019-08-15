@@ -17,8 +17,8 @@ const FacturaComponent = (props) =>{
                     <h4>Importe: {'$'+props.importe}</h4>
                     <div className="descargaFact">
                         {/*<button onClick={() => props.descarga("pdf", props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></button>*/}
-                        <button className="botones" style={{fontSize: '2.75rem'}}><a download={"prueba.pdf"} href={'data:application/octet-stream;base64,' + props.pdf}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></a></button>
-                        <button disabled={props.xml} onClick={() => props.descarga("xml", props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className="fas fa-file-code" style={{color: xmlColor}}></i></button>
+                        <button className="botones" style={{fontSize: '2.75rem'}}><a download={props.fileName.toString()} href={'data:application/octet-stream;base64,' + props.pdf}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></a></button>
+                        <button disabled={props.xml} onClick={() => props.descarga(props.fileName.toString(), props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className="fas fa-file-code" style={{color: xmlColor}}></i></button>
                     </div>
                 </div>
             </div>

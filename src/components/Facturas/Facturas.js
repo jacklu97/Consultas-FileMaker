@@ -14,7 +14,7 @@ class Facturas extends Component {
     }
 
     componentWillMount = () =>{
-        axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/FacturasApi.json?RFMfind=SELECT%20%27_NO FACTURA%27%2CCFDI.UUID%2CCERTIFICADO.FECHA%2CFILE%2CEMPRESA_QUE_FACTURARA%2CRFC%2CFXML%2CXmlEncode%2CPdfEncode%2CSERIE%2CCODIGO_DIVISA%2C%27IMPORTE FACT%27%2CTIPO.COMPROBANTE%20WHERE%20STATUS_PAGO%3D%27SIN PAGAR%27%20AND%20ID_CLIENTE%3DCRM4379',
+        axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/FacturasApi.json?RFMfind=SELECT%20%27_NO FACTURA%27%2CCFDI.UUID%2CCERTIFICADO.FECHA%2CFILE%2CEMPRESA_QUE_FACTURARA%2CRFC%2CNombrePdf%2CXmlEncode%2CPdfEncode%2CSERIE%2CCODIGO_DIVISA%2C%27IMPORTE FACT%27%2CTIPO.COMPROBANTE%20WHERE%20STATUS_PAGO%3D%27SIN PAGAR%27%20AND%20ID_CLIENTE%3DCRM4379',
                     {
                         'auth':{
                             username: 'system',
@@ -37,19 +37,15 @@ class Facturas extends Component {
     }
 
     downloadHandler = (params, id) => {
-        let salida = null
         let texto64 = this.state.facturas.filter( factura => {
             return factura["_NO FACTURA"] === id
         })
-        
-        if(params === "pdf")
-             salida = ( texto64[0].PdfEncode)
-        else
-          salida = ( texto64[0].XmlEncode)
+        let salida = ( texto64[0].XmlEncode)
         let desEncripta = atob(salida)
         //console.log(desEncripta)
+        let nombreArch = params.substr(0, params.indexOf('.')) + '.xml'
         const FileDownload = require('js-file-download');
-        FileDownload(desEncripta, 'prueba.'+params)
+        FileDownload(desEncripta, nombreArch)
     }
 
     handleFinderChange = (e) =>{
@@ -81,7 +77,7 @@ class Facturas extends Component {
         ]
 
         return (
-            <div>
+            <div style={{justifyContent: 'center'}}>
                 <h1 style={{display: 'inline'}}>Listado de facturas</h1>
                 <div style={{display: 'inline', width:'10%'}}>
                     <Select name="empresa"
@@ -89,7 +85,7 @@ class Facturas extends Component {
                             options={empresas} 
                             onChange={this.handleFinderChange}
                             isClearable={true}
-                            defaultInputValue="Selecciona una empresa..."
+                            placeholder={"Selecciona una empresa..."}
                             />        
                 </div>
                 <div className="row">
@@ -106,8 +102,9 @@ class Facturas extends Component {
                                 divisa={f.CODIGO_DIVISA}
                                 tipoCom={f["TIPO.COMPROBANTE"]}
                                 importe={f["IMPORTE FACT"]}
-                                xml={f.FXML ? false : true}
-                                pdf={textoPdf64}/>
+                                xml={f.XmlEncode ? false : true}
+                                pdf={textoPdf64}
+                                fileName = {f.NombrePdf}/>
                     })
                     : carga}
                 </div>

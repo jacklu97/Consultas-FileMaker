@@ -23,6 +23,7 @@ class Login extends Component {
         console.log(this.state)
         
         if (this.state.username === "BME820202JM6" && this.state.password === "Bmercurio_131145"){
+            localStorage.setItem('jwtToken', JSON.stringify(this.state.token))
             console.log("Exito")
             this.props.history.push('/home')
         }
