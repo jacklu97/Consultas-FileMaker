@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function(ComposedComponent){
     class Authenticate extends React.Component {
-        componentWillMount() {
+        UNSAFE_componentWillMount() {
             if(null === localStorage.getItem('jwtToken')) return this.props.history.push("/");
             let ahora = new Date();
             let jason = JSON.parse (localStorage.getItem('jwtToken'))
