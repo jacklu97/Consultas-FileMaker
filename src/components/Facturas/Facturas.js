@@ -14,7 +14,7 @@ class Facturas extends Component {
     }
 
     componentWillMount = () =>{
-        axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/FacturasApi.json?RFMfind=SELECT%20%27_NO FACTURA%27%2CCFDI.UUID%2CCERTIFICADO.FECHA%2CFILE%2CEMPRESA_QUE_FACTURARA%2CRFC%2CNombrePdf%2CXmlEncode%2CPdfEncode%2CSERIE%2CCODIGO_DIVISA%2C%27IMPORTE FACT%27%2CTIPO.COMPROBANTE%20WHERE%20STATUS_PAGO%3D%27SIN PAGAR%27%20AND%20ID_CLIENTE%3DCRM4379',
+        axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/FacturasApi.json?RFMfind=SELECT%20%27_NO FACTURA%27%2CCFDI.UUID%2CCERTIFICADO.FECHA%2CFILE%2CEMPRESA_QUE_FACTURARA%2CRFC%2CNombrePdf%2CXmlEncode%2CPdfEncode%2CSERIE%2CCODIGO_DIVISA%2C%27IMPORTE FACT%27%2C%27FECHA FACT%27%2CTIPO.COMPROBANTE%20WHERE%20STATUS_PAGO%3D%27SIN PAGAR%27%20AND%20ID_CLIENTE%3DCRM4379',
                     {
                         'auth':{
                             username: 'system',
@@ -64,6 +64,21 @@ class Facturas extends Component {
         })
     }
 
+    getDateConFormato = (e) =>{
+        //Esta es para las facturas de HK
+        let fecha = new Date( Date.parse(e) )
+        let dia = fecha.getDate()
+        let mes = fecha.getMonth() + 1
+        let anio = fecha.getFullYear()
+        if (dia < 10) { 
+            dia = '0' + dia; 
+        } 
+        if (mes < 10) { 
+            mes = '0' + mes; 
+        } 
+        return dia + '/' + mes + '/' + anio
+    }
+
     render(){
         const carga = (<div className="spinner-box">
                       <div className="circle-border">
@@ -104,7 +119,8 @@ class Facturas extends Component {
                                 importe={f["IMPORTE FACT"]}
                                 xml={f.XmlEncode ? false : true}
                                 pdf={textoPdf64}
-                                fileName = {f.NombrePdf}/>
+                                fileName = {f.NombrePdf}
+                                fechaFact = {f.SERIE ? this.getDateConFormato(f["FECHA FACT"]) : this.getDateConFormato(f["CERTIFICADO.FECHA"])}/>
                     })
                     : carga}
                 </div>

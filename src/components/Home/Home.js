@@ -3,6 +3,7 @@ import React from 'react'
 import './Home.css'
 
 import logo from '../../logo-certificacion.svg'
+import logoCC from '../../logogrande.png.png'
 
 const Home = () => {
     return (
@@ -19,7 +20,7 @@ const Home = () => {
                 No importa si nos visita desde un celular, la información siempre está disponible para usted.
             </p>
             <footer className="piso">
-                <img className="logoCC" src="http://www.centralcargo.mx/images/logo.png" alt="logo central cargo b/n"></img>
+                <img className="logoCC" src={logoCC} alt="logo central cargo b/n"></img>
                 <img className="logoCer" src={logo} alt="logo certificacion"></img>
                 <h1 className="frase">Logística a tu medida</h1>
             </footer>

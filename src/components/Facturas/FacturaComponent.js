@@ -15,6 +15,7 @@ const FacturaComponent = (props) =>{
                     <h4>Divisa: {props.divisa}</h4>
                     <h4>Tipo de comprobante: {props.tipoCom}</h4>
                     <h4>Importe: {'$'+props.importe}</h4>
+                    <p>Fecha de factura: {props.fechaFact}</p>
                     <div className="descargaFact">
                         {/*<button onClick={() => props.descarga("pdf", props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></button>*/}
                         <button className="botones" style={{fontSize: '2.75rem'}}><a download={props.fileName.toString()} href={'data:application/octet-stream;base64,' + props.pdf}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></a></button>
