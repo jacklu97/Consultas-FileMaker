@@ -12,7 +12,8 @@ class Facturas extends Component {
             facturas: props.paseFacturas,
             facturasBus: props.paseFacturas,
             cargado: false,
-            error: false
+            error: false,
+            buscado: false
         }
     }
 
@@ -66,13 +67,16 @@ class Facturas extends Component {
         FileDownload(desEncripta, nombreArch)
     }
 
-    handleFinderChange = (e) =>{
-        console.log(e)
+    /*handleFinderChange = (value, e) =>{
+        console.log("Esto es value: ", value)
+        console.log("Este es e:",e)
         let dato = ''
-        if(e !== null)
-            dato = e.value.toLowerCase()
+        if((e) !== null){
+            console.log("Nel prro, no es nulo")
+            //dato = e.value.toLowerCase()
+            console.log(Object.values(e).join(" ").toLowerCase())
+        }
         this.setState({
-            busqueda: dato,
             facturasBus: this.state.facturas.filter( e => {
                 return Object.values(e)
                 .join(" ")
@@ -80,6 +84,58 @@ class Facturas extends Component {
                 .match(dato)
             })
         })
+    }*/
+
+    handleFinderChange = (value, e) =>{
+        if(value !== null && e.action !== "clear"){
+            console.log("Esto es value: ", value[value.length-1].value)
+            console.log("Este es e:",e.action)
+            if(e.action === "select-option"){
+                if(!this.state.buscado){
+                    let datoBuscado = value[value.length-1].value.toLowerCase()
+                    let perrones = this.state.facturas.filter( e => {
+                        return Object.values(e)
+                        .join(" ")
+                        .toLowerCase()
+                        .match(datoBuscado) })
+                    console.log("Entra")
+                    this.setState({
+                        buscado: true,
+                        facturasBus: [...perrones]
+                        }, this.forceUpdate())
+                    }
+                else{
+                    let datoBuscado = value[value.length-1].value.toLowerCase()
+                    this.setState({
+                        facturasBus: this.state.facturasBus.filter( e => {
+                            return Object.values(e)
+                            .join(" ")
+                            .toLowerCase()
+                            .match(datoBuscado)
+                        })
+                    })
+                }
+            }
+            else if(e.action === "remove-value"){
+                let datoBuscado = value[value.length-1].value.toLowerCase()
+                this.setState({
+                    buscado: true,
+                    facturasBus: this.state.facturas.filter( e => {
+                        return Object.values(e)
+                        .join(" ")
+                        .toLowerCase()
+                        .match(datoBuscado)
+                    })
+                })
+            }
+        }
+        else{
+            this.setState({
+                buscado: false,
+                facturasBus: this.state.facturas
+            })
+        }
+        
     }
 
     getDateConFormato = (e) =>{
@@ -108,17 +164,29 @@ class Facturas extends Component {
             { value: 'CCF MEXICO', label: 'CENTRAL CARGO FORWARDING'},
             { value: 'CCI HONG KONG', label: 'CENTRAL CARGO INTERNATIONAL LIMITED'}
         ]
+        const divisas = [
+            { value: 'USD', label: 'Dólares'},
+            { value: 'MXN', label: 'Pesos mexicanos'}
+        ]
+
+        const opcionesBusqueda = [
+            { label: 'Divisas', options: divisas},
+            { label: 'Empresas', options: empresas}
+        ]
 
         return (
             <div style={{justifyContent: 'center'}}>
                 <h1 style={{display: 'inline'}}>Listado de facturas</h1>
                 <div style={{display: 'inline', width:'10%'}}>
-                    <Select name="empresa"
+                    <Select 
                             className="prueba"
-                            options={empresas} 
+                            options={opcionesBusqueda} 
                             onChange={this.handleFinderChange}
                             isClearable={true}
-                            placeholder={"Selecciona una empresa..."}
+                            isSearchable
+                            isMulti
+                            inputValue={this.state.busqueda}
+                            placeholder={"Selecciona un filtro de búsqueda..."}
                             />        
                 </div>
                 
@@ -142,7 +210,7 @@ class Facturas extends Component {
                                     divisa={f.CODIGO_DIVISA}
                                     tipoCom={f["TIPO.COMPROBANTE"]}
                                     importe={f["IMPORTE FACT"]}
-                                    xml={f.XmlEncode ? false : true}
+                                    xml={f.XmlEncode ? true : false}
                                     pdf={f.PdfEncode}
                                     fileName = {f.NombrePdf}
                                     fechaFact = {f.SERIE ? this.getDateConFormato(f["FECHA FACT"]) : this.getDateConFormato(f["CERTIFICADO.FECHA"])}/>

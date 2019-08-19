@@ -2,10 +2,9 @@ import React from 'react'
 import Popup from "reactjs-popup"
 import './FacturaComponent.css'
 
+import classnames from 'classnames'
+
 const FacturaComponent = (props) =>{
-    let xmlColor = props.xml ? '#d9d9d9' : '##e6884e'
-    
-    
     return (
         <tr>
             <th>{props.idFac}</th>
@@ -31,7 +30,7 @@ const FacturaComponent = (props) =>{
                 </Popup>
                 
                 <button className="botones" style={{fontSize: '2.75rem'}}><a download={props.fileName.toString()} href={'data:application/octet-stream;base64,' + props.pdf}><i className="fas fa-file-pdf" style={{color: '#e03b16'}}></i></a></button>
-                <button disabled={props.xml} onClick={() => props.descarga(props.fileName.toString(), props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className="fas fa-file-code" style={{color: xmlColor}}></i></button>
+                <button disabled={!props.xml} onClick={() => props.descarga(props.fileName.toString(), props.idFac)} className="botones" style={{fontSize: '2.75rem'}}><i className={classnames ("fas fa-file-code", props.xml ? "xml1" : "xml2")} ></i></button>
             </th>
         </tr>
     )
