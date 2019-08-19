@@ -93,12 +93,13 @@ class Facturas extends Component {
             if(e.action === "select-option"){
                 if(!this.state.buscado){
                     let datoBuscado = value[value.length-1].value.toLowerCase()
-                    let perrones = this.state.facturas.filter( e => {
-                        return Object.values(e)
+                    let perrones = this.state.facturas.filter( f => {
+                        return Object.values(f)
                         .join(" ")
                         .toLowerCase()
                         .match(datoBuscado) })
                     console.log("Entra")
+                    console.log(perrones)
                     this.setState({
                         buscado: true,
                         facturasBus: [...perrones]
@@ -119,7 +120,6 @@ class Facturas extends Component {
             else if(e.action === "remove-value"){
                 let datoBuscado = value[value.length-1].value.toLowerCase()
                 this.setState({
-                    buscado: true,
                     facturasBus: this.state.facturas.filter( e => {
                         return Object.values(e)
                         .join(" ")
