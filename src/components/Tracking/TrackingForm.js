@@ -6,12 +6,15 @@ import TrackingComponent from './TrackingComponent';
 
 
 class TrackingForm extends Component {
-    state={
-        busqueda: '',
-        filtrados: [],
-        embarques: [],
-        cargado: false,
-        error: false
+    constructor(props) {
+        super(props)
+        this.state={
+            busqueda: '',
+            filtrados: props.paseEmbarques,
+            embarques: props.paseEmbarques,
+            cargado: false,
+            error: false
+        }
     }
 
     /*UNSAFE_componentWillMount = () => {
@@ -30,10 +33,17 @@ class TrackingForm extends Component {
             this.setState({error: true})
         })
     }*/
-    static getDerivedStateFromProps =(props)=>{
+
+    /*static getDerivedStateFromProps =(props)=>{
         return({
             embarques: props.paseEmbarques,
             filtrados: props.paseEmbarques,
+            cargado: true
+        })
+    }*/
+
+    componentDidMount = () => {
+        this.setState({
             cargado: true
         })
     }

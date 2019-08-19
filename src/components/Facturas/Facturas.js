@@ -6,12 +6,16 @@ import Select from 'react-select'
 import './Facturas.css'
 class Facturas extends Component {
 
-    state = {
-        facturas: [],
-        cargado: false,
-        facturasBus: [],
-        error: false
+    constructor(props){
+        super(props)
+        this.state={
+            facturas: props.paseFacturas,
+            facturasBus: props.paseFacturas,
+            cargado: false,
+            error: false
+        }
     }
+
 
     /*UNSAFE_componentWillMount = () =>{
         axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/FacturasApi.json?RFMfind=SELECT%20%27_NO FACTURA%27%2CCFDI.UUID%2CCERTIFICADO.FECHA%2CFILE%2CEMPRESA_QUE_FACTURARA%2CRFC%2CNombrePdf%2CXmlEncode%2CPdfEncode%2CSERIE%2CCODIGO_DIVISA%2C%27IMPORTE FACT%27%2C%27FECHA FACT%27%2CTIPO.COMPROBANTE%20WHERE%20STATUS_PAGO%3D%27SIN PAGAR%27%20AND%20ID_CLIENTE%3DCRM4379',
@@ -30,10 +34,16 @@ class Facturas extends Component {
         })
     }*/
 
-    static getDerivedStateFromProps =(props)=>{
+    /*static getDerivedStateFromProps =(props)=>{
         return({
             facturas: props.paseFacturas,
             facturasBus: props.paseFacturas,
+            cargado: true
+        })
+    }*/
+
+    componentDidMount = () => {
+        this.setState({
             cargado: true
         })
     }
@@ -111,27 +121,35 @@ class Facturas extends Component {
                             placeholder={"Selecciona una empresa..."}
                             />        
                 </div>
-                <div className="row">
-                    {this.state.cargado ? 
-                    this.state.facturasBus.map( (f,i) => {
-                        let textoPdf64 = f.PdfEncode
-                        //let pasoPdf = atob(textoPdf64)
-                        return <FacturaComponent 
-                                descarga = {this.downloadHandler}
-                                key = {i}
-                                idFac={f["_NO FACTURA"]} 
-                                file={f.FILE}
-                                empresa={f["EMPRESA_QUE_FACTURARA"] === "CCF MEXICO" ? "CENTRAL CARGO FORWARDING" : "CENTRAL CARGO INTERNATIONAL LIMITED"}
-                                divisa={f.CODIGO_DIVISA}
-                                tipoCom={f["TIPO.COMPROBANTE"]}
-                                importe={f["IMPORTE FACT"]}
-                                xml={f.XmlEncode ? false : true}
-                                pdf={textoPdf64}
-                                fileName = {f.NombrePdf}
-                                fechaFact = {f.SERIE ? this.getDateConFormato(f["FECHA FACT"]) : this.getDateConFormato(f["CERTIFICADO.FECHA"])}/>
-                    })
-                    : carga}
-                </div>
+                
+                {this.state.cargado ? 
+                 <table>
+                    <tbody>
+                        <tr>
+                            <th>No Fact</th>
+                            <th>File</th>
+                            <th>Empresa</th>
+                            <th>Divisa</th>
+                            <th>Descargas</th>
+                        </tr>
+                        {this.state.facturasBus.map( (f,i) => {
+                            return <FacturaComponent 
+                                    descarga = {this.downloadHandler}
+                                    key = {i}
+                                    idFac={f["_NO FACTURA"]} 
+                                    file={f.FILE}
+                                    empresa={f["EMPRESA_QUE_FACTURARA"] === "CCF MEXICO" ? "CENTRAL CARGO FORWARDING" : "CENTRAL CARGO INTERNATIONAL LIMITED"}
+                                    divisa={f.CODIGO_DIVISA}
+                                    tipoCom={f["TIPO.COMPROBANTE"]}
+                                    importe={f["IMPORTE FACT"]}
+                                    xml={f.XmlEncode ? false : true}
+                                    pdf={f.PdfEncode}
+                                    fileName = {f.NombrePdf}
+                                    fechaFact = {f.SERIE ? this.getDateConFormato(f["FECHA FACT"]) : this.getDateConFormato(f["CERTIFICADO.FECHA"])}/>
+                                    
+                        })}
+                    </tbody>
+                </table> : carga}
                 
             </div>
             )
