@@ -38,7 +38,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 .search {
-  width: 100%;
+  width: 50%;
   position: relative;
   display: flex;
 }
@@ -72,9 +72,12 @@
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 70%;
+  display: inline-block;
+  
+  width: 80%;
   margin-top: 2%;
   margin-bottom: 2%;
+  
 }
 
 @media (max-width: 1000px) {

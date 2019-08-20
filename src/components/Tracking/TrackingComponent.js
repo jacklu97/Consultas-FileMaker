@@ -15,24 +15,24 @@ const claseVariable = (status) =>{
 
 const TrackingComponent = (props) => {
 
-    const contenedores = props.contenedores.split(' ')
+    const contenedores = props.objeto.CONTENEDORES.split(' ')
     const listItems = contenedores.map( (cont, i) => {
         return <li key={i}>{cont}</li>
     })
 
-    const claseStatus = claseVariable(props.status)
+    const claseStatus = claseVariable(props.objeto["STATUS EMBARQUES"])
 
     return(
         <div className="contenedorTrack">
-            <h3>ID File: {props.id}</h3>
-            <h4>MBL: {props.mbl}</h4>
-            <h4>HBL: {props.hbl}</h4>
-            <h5>Buque: {props.buque}</h5>
-            <h5>POL: {props.pol}</h5>
-            <h5>POD: {props.pod}</h5>
-            <h5>Destino final:{props.desFin ? props.desFin : "  -"}</h5>
-            <h5>Viaje: {props.viaje}</h5>
-            <h5>Naviera: {props.navi}</h5>
+            <h3>ID File: {props.objeto.ID_FILE}</h3>
+            <h4>MBL: {props.objeto.MBL}</h4>
+            <h4>HBL: {props.objeto.HBL}</h4>
+            <h5>Buque: {props.objeto.BUQUE}</h5>
+            <h5>POL: {props.objeto.POL}</h5>
+            <h5>POD: {props.objeto.POD}</h5>
+            <h5>Destino final:{props.objeto["DESTINO FINAL"] ? props.objeto["DESTINO FINAL"] : "  -"}</h5>
+            <h5>Viaje: {props.objeto.VIAJE}</h5>
+            <h5>Naviera: {props.objeto.NAVIERA}</h5>
             <h5>Contenedores</h5>
             <table>
                 <tbody>
@@ -43,10 +43,10 @@ const TrackingComponent = (props) => {
                         <th>LCL</th>
                     </tr>
                     <tr>
-                        <th>{props.dc20}</th>
-                        <th>{props.dc40}</th>
-                        <th>{props.hq40}</th>
-                        <th>{props.lcl}</th>
+                        <th>{props.objeto["CNTR 20DC"]}</th>
+                        <th>{props.objeto["CNTR 40DC"]}</th>
+                        <th>{props.objeto["CNTR 40HQ"]}</th>
+                        <th>{props.objeto["CNTR LCL"]}</th>
                     </tr>
                 </tbody>
             </table>
@@ -54,11 +54,11 @@ const TrackingComponent = (props) => {
             <ul>
                 {listItems}
             </ul>
-            <h5>ETA: {props.eta}</h5>
-            <h5>ETD: {props.etd}</h5>
+            <h5>ETA: {props.objeto.ETA}</h5>
+            <h5>ETD: {props.objeto.ETD}</h5>
             <div className="estatusEmbarque">
                 <i className={claseStatus} style={{fontSize: '2.75em', color:'red'}}></i>
-                <p style={{marginTop:'4%'}}>{props.status}</p>
+                <p style={{marginTop:'4%'}}>{props.objeto["STATUS EMBARQUES"]}</p>
             </div>
         </div>
     )
