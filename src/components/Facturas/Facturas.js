@@ -88,44 +88,32 @@ class Facturas extends Component {
 
     handleFinderChange = (value, e) =>{
         if(value !== null && e.action !== "clear"){
-            console.log("Esto es value: ", value[value.length-1].value)
-            console.log("Este es e:",e.action)
             if(e.action === "select-option"){
                 if(!this.state.buscado){
                     let datoBuscado = value[value.length-1].value.toLowerCase()
                     let perrones = this.state.facturas.filter( f => {
-                        return Object.values(f)
-                        .join(" ")
-                        .toLowerCase()
-                        .match(datoBuscado) })
-                    console.log("Entra")
-                    console.log(perrones)
+                        return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
                     this.setState({
                         buscado: true,
                         facturasBus: [...perrones]
-                        }, this.forceUpdate())
+                        })
                     }
                 else{
                     let datoBuscado = value[value.length-1].value.toLowerCase()
+                    let perrones = this.state.facturasBus.filter( f => {
+                        return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
                     this.setState({
-                        facturasBus: this.state.facturasBus.filter( e => {
-                            return Object.values(e)
-                            .join(" ")
-                            .toLowerCase()
-                            .match(datoBuscado)
-                        })
+                        buscado: true,
+                        facturasBus: [...perrones]
                     })
                 }
             }
             else if(e.action === "remove-value"){
                 let datoBuscado = value[value.length-1].value.toLowerCase()
+                let perrones = this.state.facturas.filter( f => {
+                    return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
                 this.setState({
-                    facturasBus: this.state.facturas.filter( e => {
-                        return Object.values(e)
-                        .join(" ")
-                        .toLowerCase()
-                        .match(datoBuscado)
-                    })
+                    facturasBus: [...perrones]
                 })
             }
         }
