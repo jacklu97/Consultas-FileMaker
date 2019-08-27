@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 import logo from '../../logoSF.png'
 import './Login.css'
 
@@ -10,8 +11,7 @@ class Login extends Component {
     state= {
         username: '',
         password: '',
-        errorPass: false,
-        errorUsr: false,
+        cargando: false,
         token: {
             fecha:''
         }
@@ -19,29 +19,27 @@ class Login extends Component {
 
     comprobarIngreso = (e) =>{
         e.preventDefault();
-        this.setState({errorPass: false, errorUsr: false})
+        this.setState({cargando: true})
         console.log(this.state)
-        
-        if (this.state.username === "BME820202JM6" && this.state.password === "Bmercurio_131145"){
-            localStorage.setItem('jwtToken', JSON.stringify(this.state.token))
-            console.log("Exito")
-            this.props.history.push('/home')
-        }
-        else if(this.state.username === "usr" && this.state.password === "pss"){
-            localStorage.setItem('jwtToken', JSON.stringify(this.state.token))
-            console.log("Exito")
-            this.props.history.push('/home')
-            
-        }
-        else{
-            console.log("Tas todo meco")
-            if(this.state.password !== "Bmercurio_131145"){
-                this.setState({errorPass: true})
+        axios.post('http://127.0.0.1:5000/login', {'rfc': this.state.username, 'password': this.state.password}, {
+            'auth':{
+                username: 'system',
+                password: 'Sys1638'
             }
-            else if(this.state.username !== "BME820202JM6"){
-                this.setState({errorUsr: true})
-            }
-        }
+        })
+        .then( response => {
+            //console.log(JSON.stringify(response.data))
+            //console.log(JSON.stringify(this.state.token))
+            localStorage.setItem('identidad', JSON.stringify(response.data))
+            localStorage.setItem('jwtToken', JSON.stringify(this.state.token))
+            //console.log(JSON.parse(localStorage.getItem("identidad")).clave)
+            this.props.history.push('/home')
+        })
+        .catch( e =>{
+            console.log(e)
+            alert("Usuario y/o contraseña erróneos. Favor de verificar sus credenciales")
+        })
+        this.setState({cargando: false})
     }
 
     crearToken = () => {
@@ -90,7 +88,7 @@ class Login extends Component {
                                 </div> : null}
                         </div>
                         <div>
-                            <button disabled={(this.state.username.length < 1 && this.state.password.length < 1) ? true : false} className="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" onClick={this.comprobarIngreso}>Ingresar</button>  
+                            <button disabled={this.state.cargando} className="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" onClick={this.comprobarIngreso}>Ingresar</button>  
                         </div>
                     </form>
                     </div>

@@ -25,7 +25,7 @@ class Main extends Component {
     
     componentDidMount = () =>{
         //Hacemos el fetch de embarques
-        axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/EmbarquesApi.json?RFMfind=SELECT%20ID_FILE%2CMBL%2CHBL%2CBUQUE%2CPOL%2CPOD%2C%27DESTINO FINAL%27%2CVIAJE%2CNAVIERA%2CTIPO%2CCLIENTE%2C%27CNTR 20DC%27%2C%27CNTR 40DC%27%2C%27CNTR 40HQ%27%2C%27CNTR LCL%27%2CCONTENEDORES%2CETD%2CETA%2C%27STATUS EMBARQUES%27%20WHERE%20STATUS_REPORTE%3DACTIVA%20AND%20_ID_CLIENTE%3DCRM4379',
+        /*axios.get('https://cors-anywhere.herokuapp.com/http://fmaker.dynalias.com/RESTfm/EASYLOAD/layout/EmbarquesApi.json?RFMfind=SELECT%20ID_FILE%2CMBL%2CHBL%2CBUQUE%2CPOL%2CPOD%2C%27DESTINO FINAL%27%2CVIAJE%2CNAVIERA%2CTIPO%2CCLIENTE%2C%27CNTR 20DC%27%2C%27CNTR 40DC%27%2C%27CNTR 40HQ%27%2C%27CNTR LCL%27%2CCONTENEDORES%2CETD%2CETA%2C%27STATUS EMBARQUES%27%20WHERE%20STATUS_REPORTE%3DACTIVA%20AND%20_ID_CLIENTE%3DCRM4379',
                     {
                         'auth':{
                             username: 'system',
@@ -53,8 +53,35 @@ class Main extends Component {
         })
         .catch( error => {
             this.setState({error: true})
+        })*/
+        axios.get(`http://127.0.0.1:5000/embarque/${JSON.parse(localStorage.getItem("identidad")).clave}`,
+                    {
+                        'auth':{
+                            username: 'system',
+                            password: 'Sys1638'
+                        }
+                    })
+        .then( response => {
+            this.setState({embarques: response.data})
+            console.log(this.state)
         })
-
+        .catch( error => {
+            this.setState({error: true})
+        })
+        axios.get(`http://127.0.0.1:5000/getFacturas/${JSON.parse(localStorage.getItem("identidad")).clave}`,
+                    {
+                        'auth':{
+                            username: 'system',
+                            password: 'Sys1638'
+                        }
+                    })
+        .then( response => {
+            this.setState({facturas: response.data, cargado: true})
+            console.log(this.state)
+        })
+        .catch( error => {
+            this.setState({error: true})
+        })
     }
     
     

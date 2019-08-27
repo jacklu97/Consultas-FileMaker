@@ -57,9 +57,9 @@ class Facturas extends Component {
 
     downloadHandler = (params, id) => {
         let texto64 = this.state.facturas.filter( factura => {
-            return factura["_NO FACTURA"] === id
+            return factura.noFactura === id
         })
-        let salida = ( texto64[0].XmlEncode)
+        let salida = ( texto64[0].xmlEncode)
         let desEncripta = atob(salida)
         //console.log(desEncripta)
         let nombreArch = params.substr(0, params.indexOf('.')) + '.xml'
@@ -92,7 +92,7 @@ class Facturas extends Component {
                 if(!this.state.buscado){
                     let datoBuscado = value[value.length-1].value.toLowerCase()
                     let perrones = this.state.facturas.filter( f => {
-                        return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
+                        return f.empresa.toLowerCase().match(datoBuscado) || f.codigoDivisa.toLowerCase().match(datoBuscado) })
                     this.setState({
                         buscado: true,
                         facturasBus: [...perrones]
@@ -101,7 +101,7 @@ class Facturas extends Component {
                 else{
                     let datoBuscado = value[value.length-1].value.toLowerCase()
                     let perrones = this.state.facturasBus.filter( f => {
-                        return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
+                        return f.empresa.toLowerCase().match(datoBuscado) || f.codigoDivisa.toLowerCase().match(datoBuscado) })
                     this.setState({
                         buscado: true,
                         facturasBus: [...perrones]
@@ -111,7 +111,7 @@ class Facturas extends Component {
             else if(e.action === "remove-value"){
                 let datoBuscado = value[value.length-1].value.toLowerCase()
                 let perrones = this.state.facturas.filter( f => {
-                    return f.EMPRESA_QUE_FACTURARA.toLowerCase().match(datoBuscado) || f.CODIGO_DIVISA.toLowerCase().match(datoBuscado) })
+                    return f.empresa.toLowerCase().match(datoBuscado) || f.codigoDivisa.toLowerCase().match(datoBuscado) })
                 this.setState({
                     facturasBus: [...perrones]
                 })
@@ -192,16 +192,16 @@ class Facturas extends Component {
                             return <FacturaComponent 
                                     descarga = {this.downloadHandler}
                                     key = {i}
-                                    idFac={f["_NO FACTURA"]} 
-                                    file={f.FILE}
-                                    empresa={f["EMPRESA_QUE_FACTURARA"] === "CCF MEXICO" ? "CENTRAL CARGO FORWARDING" : "CENTRAL CARGO INTERNATIONAL LIMITED"}
-                                    divisa={f.CODIGO_DIVISA}
-                                    tipoCom={f["TIPO.COMPROBANTE"]}
-                                    importe={f["IMPORTE FACT"]}
-                                    xml={f.XmlEncode ? true : false}
-                                    pdf={f.PdfEncode}
-                                    fileName = {f.NombrePdf}
-                                    fechaFact = {f.SERIE ? this.getDateConFormato(f["FECHA FACT"]) : this.getDateConFormato(f["CERTIFICADO.FECHA"])}/>
+                                    idFac={f.noFactura} 
+                                    file={f.noFile}
+                                    empresa={f.empresa === "CCF MEXICO" ? "CENTRAL CARGO FORWARDING" : "CENTRAL CARGO INTERNATIONAL LIMITED"}
+                                    divisa={f.codigoDivisa}
+                                    tipoCom={f.tipoComprobante}
+                                    importe={f.importeFact}
+                                    xml={f.xmlEncode ? true : false}
+                                    pdf={f.pdfEncode}
+                                    fileName = {f.nombrePdf}
+                                    fechaFact = {f.serie ? this.getDateConFormato(f.fechaFact) : this.getDateConFormato(f.certificadoFecha)}/>
                                     
                         })}
                     </tbody>
