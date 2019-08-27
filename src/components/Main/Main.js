@@ -54,7 +54,7 @@ class Main extends Component {
         .catch( error => {
             this.setState({error: true})
         })*/
-        axios.get(`http://127.0.0.1:5000/embarque/${JSON.parse(localStorage.getItem("identidad")).clave}`,
+        axios.get(`https://apirestcentralcargo.herokuapp.com/embarque/${JSON.parse(localStorage.getItem("identidad")).clave}`,
                     {
                         'auth':{
                             username: 'system',
@@ -68,7 +68,7 @@ class Main extends Component {
         .catch( error => {
             this.setState({error: true})
         })
-        axios.get(`http://127.0.0.1:5000/getFacturas/${JSON.parse(localStorage.getItem("identidad")).clave}`,
+        axios.get(`https://apirestcentralcargo.herokuapp.com/getFacturas/${JSON.parse(localStorage.getItem("identidad")).clave}`,
                     {
                         'auth':{
                             username: 'system',

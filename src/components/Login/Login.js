@@ -21,7 +21,7 @@ class Login extends Component {
         e.preventDefault();
         this.setState({cargando: true})
         console.log(this.state)
-        axios.post('http://127.0.0.1:5000/login', {'rfc': this.state.username, 'password': this.state.password}, {
+        axios.post('https://apirestcentralcargo.herokuapp.com/login', {'rfc': this.state.username, 'password': this.state.password}, {
             'auth':{
                 username: 'system',
                 password: 'Sys1638'
