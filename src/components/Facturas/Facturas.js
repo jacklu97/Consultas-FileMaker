@@ -201,7 +201,7 @@ class Facturas extends Component {
                                     xml={f.xmlEncode ? true : false}
                                     pdf={f.pdfEncode}
                                     fileName = {f.nombrePdf}
-                                    fechaFact = {f.serie ? this.getDateConFormato(f.fechaFact) : this.getDateConFormato(f.certificadoFecha)}/>
+                                    fechaFact = {f.serie ? f.fechaFact.substr(0,10) : this.getDateConFormato(f.certificadoFecha)}/>
                                     
                         })}
                     </tbody>
